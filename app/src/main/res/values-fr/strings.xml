@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Application1</string>
+    <string name="button1_name">Ajouter</string>
+    <string name="button2_name">Retour</string>
+
+</resources>
