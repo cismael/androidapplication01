@@ -8,31 +8,33 @@ pipeline {
 				echo  '>>>>>>>>>> Jenkins Build Started'
 				echo 'Cleaning..'
 				script {
-					if(isUnix()){
-					    './gradlew clean'
-					} else {
-						'./gradlew clean'
-					}
+				    gradle clean
+// 					if(isUnix()){
+// 					    sh 'gradlew clean'
+// 					} else {
+// 						bat 'gradlew.bat clean'
+// 					}
 				}
 			}
 		}
 		stage('Checkout'){
 			steps {
 				echo 'Checkout..'
-				checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '35b526e5-7e1e-4fe2-afb4-fde2a7b1b743', url: 'https://cismael@bitbucket.org/cismael/androidapplication01.git']]])
+				checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '35b526e5-7e1e-4fe2-afb4-fde2a7b1b743', url: 'https://github.com/cismael/androidapplication01.git']]])
 			}
 		}
 		stage('Build') {
 			steps {
 				echo 'Building..'
 				script {
-					if(isUnix()){
-					    echo 'UNIX--------------------------------'
-					    './gradle build --info --warning-mode=all --stacktrace'
-					} else {
-						echo 'WINDOWS---------------------------'
-						'./gradlew build --info --warning-mode=all --stacktrace'
-					}
+				    gradle build --info --warning-mode all --stacktrace
+// 					if(isUnix()){
+// 					    echo 'UNIX--------------------------------'
+// 					    sh 'gradlew build --info --warning-mode all --stacktrace'
+// 					} else {
+// 						echo 'WINDOWS---------------------------'
+// 						bat 'gradlew.bat build --info --warning-mode all --stacktrace'
+// 					}
 				}
 			}
 		}
@@ -62,11 +64,12 @@ pipeline {
 			steps {
 				echo 'Testing..'
 				script {
-					if(isUnix()){
-					    './gradlew test'
-					} else {
-						'./gradlew test'
-					}
+				    gradle test
+// 					if(isUnix()){
+// 					    sh 'gradlew test'
+// 					} else {
+// 						bat 'gradlew.bat test'
+// 					}
 				}
 			}
 		}
